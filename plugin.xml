@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-syslog" version="0.0.1">
+    <name>Android System Logs</name>
+    <description>Extract syslogs from rooted android devices</description>
+    <license>MIT</license>
+    <keywords>cordova,android,syslog,log</keywords>
+    <js-module src="www/syslog.js" name="device-logs">
+        <clobbers target="cordova.plugins.Syslog" />
+    </js-module>
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Syslog">
+                <param name="android-package" value="dk.fadeit.syslog.Syslog"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+        <source-file src="src/android/Syslog.java" target-dir="src/dk/fadeit/syslog/Syslog" />
+    </platform>
+</plugin>
