@@ -8,10 +8,11 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class Syslog extends CordovaPlugin {
 
-    private static final String TAG = "RebootPlugin";
+    private static final String TAG = "SyslogPlugin";
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -26,20 +27,19 @@ public class Syslog extends CordovaPlugin {
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
-                    Log.i(TAG, "Syslog start");
+                    Log.i(TAG, "Requesting syslog...");
                     ProcessBuilder builder = new ProcessBuilder(new String[] { "su", "-c", "logcat", "-d" });
                     builder.redirectErrorStream(true);
                     Process proc = builder.start();
                     InputStream stdout = proc.getInputStream();
                     BufferedReader reader = new BufferedReader (new InputStreamReader(stdout));
-                    int logCount = 0;
                     String line;
+                    JSONArray logLines = new JSONArray();
                     while ((line = reader.readLine()) != null) {
-                        logCount++;
+                        logLines.put(line);
                     }
-                    Log.i(TAG, "Syslog success");
-                    Log.i(TAG, "Loglines: " + logCount);
-                    callbackContext.success("Syslog success");
+                    Log.i(TAG, "Got " + logLines.length() + " syslog entries");
+                    callbackContext.success(logLines);
                 } catch (Exception ex) {
                     Log.e(TAG, "Syslog failed", ex);
                     callbackContext.error("Syslog failed");
