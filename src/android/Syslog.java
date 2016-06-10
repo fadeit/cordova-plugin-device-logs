@@ -8,7 +8,6 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class Syslog extends CordovaPlugin {
 
