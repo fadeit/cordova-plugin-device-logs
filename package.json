@@ -1,0 +1,19 @@
+{
+  "name": "cordova-plugin-syslog",
+  "version": "1.0.0",
+  "description": "Extract syslogs from rooted android devices.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/playsignage/cordova-plugin-syslog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/playsignage/cordova-plugin-syslog/issues"
+  },
+  "homepage": "https://github.com/playsignage/cordova-plugin-syslog#readme"
+}
